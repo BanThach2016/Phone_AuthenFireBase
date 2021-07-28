@@ -14,6 +14,9 @@ import com.anhtong8x.phone_authenfirebase.R;
 import com.hbb20.CountryCodePicker;
 
 /*
+    pass git: Nhap pass vao la ok ( anhtong86@ )
+    key ssh: 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
+
 - Connect app voi firebase
     + Tool/Firebase
     + Authentication

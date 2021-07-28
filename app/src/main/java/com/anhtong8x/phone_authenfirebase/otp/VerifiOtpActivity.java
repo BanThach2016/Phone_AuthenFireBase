@@ -49,6 +49,7 @@ public class VerifiOtpActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_verifi_otp);
 
+        // 1. Lay ve so dien thoai
         _phone = getIntent().getStringExtra("phone");
         Log.d(TAG, _phone);
 
@@ -57,15 +58,16 @@ public class VerifiOtpActivity extends AppCompatActivity {
         btnReSendCode = findViewById(R.id.btnTime);
         btnNext = findViewById(R.id.btnNext);
 
-        //
+        // 2. Khoi tao doi tuong FirebaseAuth
         mFirebaseAuth = FirebaseAuth.getInstance();
         // tat popup recapcha moi truong dev . Dang bi loi
         //mFirebaseAuth.getFirebaseAuthSettings().setAppVerificationDisabledForTesting(true);
 
+        //  3. Gui so phone len server
         sendVerificationCode(_phone);
 
-        //
-        startResendTimer(15);
+        //  4. Dem nguoc de yc gui lai otp
+        startResendTimer(60);
 
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,7 +92,8 @@ public class VerifiOtpActivity extends AppCompatActivity {
         super.onBackPressed();
     }
 
-    //
+    // Gui so dien thoai len server. Timeout la 30s
+    // 1 callback mCallback de nhan ket qua tra ve
     private void sendVerificationCode(String phone) {
         PhoneAuthOptions options =
                 PhoneAuthOptions.newBuilder(mFirebaseAuth)
@@ -106,10 +109,12 @@ public class VerifiOtpActivity extends AppCompatActivity {
 
     }
 
+    // callback nhan ket qua tra ve
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
         @Override
         public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
 
+            // Nhan duoc ma otp cua server
             String otp = phoneAuthCredential.getSmsCode();
 
             if(otp != null){
@@ -131,7 +136,7 @@ public class VerifiOtpActivity extends AppCompatActivity {
             super.onCodeSent(s, forceResendingToken);
 
             mVerificationId = s;
-            mResendToken = forceResendingToken;
+            mResendToken = forceResendingToken; // token cua server
 
             Log.d(TAG, "onCodeSent");
             Log.d(TAG, "mVerificationId");
@@ -139,11 +144,14 @@ public class VerifiOtpActivity extends AppCompatActivity {
         }
     };
 
+    // Dung otp va token de tao obj PhoneAuthCredential
+    // Dung obj PhoneAuthCredential gui len server de chung thuc
     private void verificationCode(String otp) {
         PhoneAuthCredential credential = PhoneAuthProvider.getCredential(mVerificationId, otp);
         SignInWithPhoneAuthCredential(credential);
     }
 
+    // Gui obj PhoneAuthCredential gui len server de chung thuc
     private void SignInWithPhoneAuthCredential(PhoneAuthCredential credential) {
         Log.d(TAG, "SignInWithPhoneAuthCredential");
 
@@ -165,6 +173,8 @@ public class VerifiOtpActivity extends AppCompatActivity {
 
     }
 
+    // Tao time count down de yc gui lai otp
+    // chu y time phai lon hon timeout cua Firebase tranh spam
     public void startResendTimer(int seconds) {
         txtTime.setVisibility(View.VISIBLE);
         btnReSendCode.setEnabled(false);
