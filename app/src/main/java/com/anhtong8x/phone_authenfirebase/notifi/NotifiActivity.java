@@ -18,6 +18,7 @@ import com.google.firebase.messaging.FirebaseMessaging;
         + Gui tokenDevice len server private. Sau nay can gui message thi se gui theo tokenDevice nay
         + Khi remove app cai moi co tokenDevice moi
         + Test gui tin lay tokenDevice vao CloudMessaging tren firebase paste token vao de de gui
+        checkout
 * */
 public class NotifiActivity extends AppCompatActivity {
 
