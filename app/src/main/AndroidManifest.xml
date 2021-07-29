@@ -11,15 +11,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Phone_AuthenFireBase">
-        <activity android:name=".otp.VerifiOtpSuccess"></activity>
-        <activity android:name=".otp.VerifiOtpActivity" />
-        <activity android:name=".otp.MainActivity">
+        <activity android:name=".notifi.NotifiActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
+        <activity android:name=".otp.VerifiOtpSuccess" />
+        <activity android:name=".otp.VerifiOtpActivity" />
+        <activity android:name=".otp.MainActivity"></activity>
+
+        <!-- service notifi -->
+        <service android:name=".notifi.MyFirebaseService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
     </application>
 
 </manifest>
