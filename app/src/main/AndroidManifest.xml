@@ -3,6 +3,9 @@
     package="com.anhtong8x.phone_authenfirebase">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -11,25 +14,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Phone_AuthenFireBase">
-        <activity android:name=".notifi.NotifiActivity">
+        <activity android:name=".realtimedb.RealTimeDbActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
+        <activity android:name=".notifi.NotifiActivity"></activity>
         <activity android:name=".otp.VerifiOtpSuccess" />
         <activity android:name=".otp.VerifiOtpActivity" />
-        <activity android:name=".otp.MainActivity"></activity>
-
+        <activity android:name=".otp.MainActivity" />
         <!-- service notifi -->
         <service android:name=".notifi.MyFirebaseService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
     </application>
 
 </manifest>
